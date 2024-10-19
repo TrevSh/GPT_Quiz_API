@@ -2,7 +2,6 @@ const authenticateToken = require('./middleware/auth');
 const authRoutes = require('./routes/authRoutes');
 
 const express = require('express');
-const mysql = require('mysql2');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
