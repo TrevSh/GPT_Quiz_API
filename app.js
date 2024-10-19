@@ -1,5 +1,5 @@
-const authenticateToken = require('./middleware/auth');
-const authRoutes = require('./routes/authRoutes');
+const authenticateToken = require('./src//middleware/auth');
+const authRoutes = require('./src/routes/authRoutes');
 
 const express = require('express');
 const dotenv = require('dotenv');
