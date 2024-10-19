@@ -5,7 +5,7 @@ const OpenAi = require('openai');
 const openai = new OpenAi({ apiKey: process.env.GPT_API_KEY });
 
 
-exports.createQuiz = async (req, res) => {
+exports.generateQuiz = async (req, res) => {
 	const { interests } = req.body;
 
 
