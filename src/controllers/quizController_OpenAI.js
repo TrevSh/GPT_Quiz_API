@@ -6,7 +6,7 @@ const openai = new OpenAi({ apiKey: process.env.GPT_API_KEY });
 
 
 exports.generateQuiz = async (req, res) => {
-	const { interests } = req.body;
+	const { interests, numQuestions = 10 } = req.body;
 
 
 	try {
@@ -14,12 +14,12 @@ exports.generateQuiz = async (req, res) => {
 			model: "gpt-4o-mini",
 			messages: [
 				{
-					role: "You are the best teacher in the world. You take a students interests and give them quizzes to help them develop and test their knowledge.",
-					content: `Generate a 10 question quiz based on these interests: ${interests}`,
+					role: "user",
+					content: `Generate ${numQuestions} unique questions for a quiz on the topic of ${interests}. Provide only the questions.`,
 				},
 			],
 			max_tokens: 500,
-			temperature: 0.7,
+			temperature: 0.4,
 		});
 		const quizData = response.choices[0].message.content;
 		res.status(200).json({ quiz: quizData });

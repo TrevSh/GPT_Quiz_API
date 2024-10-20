@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const authenticateToken = (req, res, next) => {
+exports.authenticateToken = (req, res, next) => {
 	const authHeader = req.headers['authorization'];
 	const token = authHeader && authHeader.split(' ')[1];
 
@@ -14,4 +14,9 @@ const authenticateToken = (req, res, next) => {
 	});
 };
 
-module.exports = authenticateToken;
+exports.skipAuthInDev = (req, res, next) => {
+	if (process.env.NODE_ENV === 'development') {
+		return next(); // Bypass auth in development
+	}
+	return authenticateToken(req, res, next);
+};
