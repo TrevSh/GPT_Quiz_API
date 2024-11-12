@@ -1,4 +1,4 @@
-const { authenticateToken } = require('./src//middleware/auth');
+const { authenticateToken } = require('./src/middleware/auth');
 const authRoutes = require('./src/routes/authRoutes');
 const quizRoutes = require('./src/routes/quizRoutes');
 
