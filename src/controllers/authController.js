@@ -12,9 +12,16 @@ exports.registerUser = async (req, res) => {
 
 		const sql = 'INSERT INTO users (name, email, password) VALUES (?,?,?)';
 
+		const [users] = await db.query(sqlAllUsers, [email]);
+
+		const userExists = users.some(user => user.name === name)
+		if (userExists) {
+			return res.status(501).json({ message: 'User already in database!' })
+		}
+
 		const [result] = await db.query(sql, [name, email, hash]);
 
-		res.status(201).json({ message: 'User registered successfully' });
+		res.status(201).json({ message: 'User registered successfully', result: result });
 	} catch (err) {
 		console.error(`${password} encountered a hashing error:`, err);
 		res.status(500).json({ message: 'Error registering user' });
